@@ -35,7 +35,7 @@ table {
 }
 tr{
     margin-bottom:20px;
-    border:1px solid grey;
+    /*border:1px solid grey;*/
 }
 td {
     min-width: 150px;

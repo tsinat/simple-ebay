@@ -22,7 +22,7 @@
     <div class="auctionlist">
         <table class='table'>
             <tbody>
-                <tr ng-repeat='auction in auctions' ur-sref='auctionDetail()'>
+                <tr ng-repeat='auction in auctions' ur-sref='auctionDetail(auction)'>
                     <td><img class='auctionsImage' ng-src="{{auction.image}}" alt=""></td>
                     <td class='tdText'>{{auction.description}}</td>
                     <td class='tdText'>{{auction.initialBid | currency}}</td>

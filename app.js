@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
-const MONGOURL = 'mongodb://localhost/simple-ebay';
+const MONGOURL = process.env.MONGODB_URI || 'mongodb://localhost/simple-ebay';
 
 mongoose.connect(MONGOURL, err => {
     console.log(err || `MongoDb connected to ${MONGOURL}`);

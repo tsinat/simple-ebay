@@ -12,11 +12,11 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/authenticate', (req, res) => {
-    User.authenticate(req.body, (err, token) => {
+    User.authenticate(req.body, (err, token, dbUser) => {
         if(err){
             res.status(400).send(err);
         }else {
-            res.cookie('accessToken', token).send();
+            res.cookie('accessToken', token).send(dbUser);
         }
     });
 });
@@ -46,7 +46,7 @@ router.get('/:id', User.isLoggedIn, (req, res) => {
     User.find(req.params.id, (err, user) => {
         if(err) return res.status()
 
-        res.send(req.user)
+        res.send(user)
     });
 });
 

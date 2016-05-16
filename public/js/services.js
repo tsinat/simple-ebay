@@ -11,7 +11,9 @@ app.service('Auth', function($http, $q) {
   this.login = userObj => {
     return $http.post('/api/users/authenticate', userObj)
       .then(res => {
-        return this.getProfile();
+          console.log(res.data);
+         this.currentUser = res.data;
+        // return this.getProfile(res.data._id);
       });
   };
 

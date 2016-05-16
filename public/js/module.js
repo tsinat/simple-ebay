@@ -3,7 +3,7 @@
 var app = angular.module('simpleEbay', ['ui.router']);
 
 // app.run(function(Auth) {
-//   Auth.getProfile();
+//   Auth.getProfile(user._id);
 // });
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -28,6 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/auctionDetail',
       templateUrl: '/html/auctionDetail.html',
       controller: 'auctionDetailCtrl'
+
     })
     .state('newAuction', {
       url: '/newAuction',
@@ -35,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: 'newAuctionCtrl',
       resolve: {
         profile: function(Auth, $q, $state) {
-          return Auth.getProfile()
+          return Auth.getProfile(user._id)
           .catch(() => {
             $state.go('home');
             return $q.reject();

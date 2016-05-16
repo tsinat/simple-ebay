@@ -62,9 +62,8 @@ userSchema.statics.authenticate = (userObj, cb) => {
             if(err || !isGood) return cb(err || {error: 'Authentication failed. Invalid email or password'});
 
             var token = dbUser.generateToken();
-            console.log('token:', token);
 
-            cb(null, token);
+            cb(null, token, dbUser);
         });
     });
 };

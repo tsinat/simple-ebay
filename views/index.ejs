@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="/js/module.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/services.js"></script>
+
+</head>
+
+<body ng-app='simpleEbay' ng-controller='mainCtrl'>
+
+    <nav class="navbar navbar-inverse">
+        <button class="btn btn-lg btn-main " ui-sref='home'>Home</button>
+        <button class="btn btn-lg btn-main " ui-sref='auction'>Auctions</button>
+        <span ng-hide='currentUser'>
+            <button class="btn btn-lg btn-main" ui-sref='register'>Register</button>
+            <button class="btn btn-lg btn-main" ui-sref='login'>Login</button>
+        </span>
+        <span ng-show='currentUser'>
+            <button class="btn btn-lg btn-main" ui-sref='newAuction'>Add Auction</button>
+            <button class="btn btn-lg btn-main" ng-click='logout()'>Logout</button>
+            <span class='currentUser'>Hello {{currentUser.firstName}}!</span>
+        </span>
+    </div>
+
+</nav>
+    <div class="container">
+        <div class="row">
+
+        <ui-view></ui-view>
+
+    </div>
+
+</body>
+
 </html>

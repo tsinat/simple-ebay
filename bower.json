@@ -6,7 +6,7 @@
     "Tsinat Zeree <cheru87@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/tsinat/simple-ebay",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,5 +14,10 @@
     "public/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "bootstrap": "^3.3.6"
+  }
 }

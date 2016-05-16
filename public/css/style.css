@@ -1,0 +1,46 @@
+.currentUser{
+    color:white;
+    float:right;
+    margin-top:10px;
+    margin-right:40px;
+}
+.btn-main{
+    border-radius: none !important;
+    color:silver;
+    background-color: #252525;
+}
+.btn-main:focus {
+    color:silver;
+}
+.btn-main:hover {
+    color:grey;
+}
+.auction{
+    margin-top: 20px;
+}
+.search{
+    padding:5px 60px;
+}
+.singleAuction{
+    border: 1px solid grey;
+}
+.auctionsImage{
+    margin: 10px 20px;
+    width:200px;
+    height: 200px;
+
+}
+table {
+    margin-top: 40px;
+}
+tr{
+    margin-bottom:20px;
+    border:1px solid grey;
+}
+td {
+    min-width: 150px;
+}
+.tdText{
+    margin-top: 30px;
+    font-size: 1.5em;
+}

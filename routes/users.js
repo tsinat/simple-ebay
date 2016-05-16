@@ -3,16 +3,11 @@ var router = express.Router();
 
 var User = require('../models/user');
 
-router.get('/', (req, res) => {
-    User.find({}, (err, users) =>{
-        res.status(err ? 400 : 200).send(err || users);
-    });
-});
 
 router.post('/register', (req, res) => {
-  User.register(req.body, err => {
-      res.status(err ? 400 : 200).send(err );
-    res.send();
+    console.log(req.body);
+  User.register(req.body, (err, savedUser) => {
+    res.status(err ? 400 : 200).send(err || savedUser);
   });
 });
 
@@ -26,8 +21,35 @@ router.post('/authenticate', (req, res) => {
     });
 });
 
+router.put('/:id', User.isLoggedIn, (req, res) => {
+    User.edit(req.params.id, req.body, (err, editedUser)=> {
+        if(err) {
+            res.status(400).send(err);
+        } else {
+            res.send(editedUser);
+        }
+    });
+});
+
 router.post('/logout', (req, res) => {
+    console.log('logout routing:');
     res.clearCookie('accessToken').send();
 });
+
+router.get('/', (req, res) => {
+    User.find({}, (err, users) =>{
+        res.status(err ? 400 : 200).send(err || users);
+    });
+});
+
+router.get('/:id', User.isLoggedIn, (req, res) => {
+    User.find(req.params.id, (err, user) => {
+        if(err) return res.status()
+
+        res.send(req.user)
+    });
+});
+
+
 
 module.exports = router;

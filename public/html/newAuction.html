@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 class='text-center'>Add New Auction</h1>
+    <form ng-submit='addAuction()'>
+
+        <div class="form-group" >
+            <label>Description:</label>
+            <input type="text" class="form-control" required ng-model='auction.description'>
+        </div>
+        <div class="form-group" >
+            <label>Image:</label>
+            <input type="text" class="form-control" required ng-model='auction.image'>
+        </div>
+        <div class="form-group">
+            <label>End Time:</label>
+            <input type="date" class="form-control" required ng-model='auction.endTime'>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" class="form-control" required ng-model='auction.category'>
+        </div>
+        <div class="form-group">
+            <label>Initial Bid</label>
+            <input type="number" class="form-control" required ng-model='auction.initialBid'>
+        </div>
+        <button class="btn btn-primary">Add Auction</button>
+    </form>
+</div>

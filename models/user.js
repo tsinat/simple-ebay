@@ -5,65 +5,34 @@ var bcrypt = require('bcryptjs');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 
-var JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 var userSchema = new mongoose.Schema({
-  first_name: {type: String, required: true},
-  last_name: {type: String, required: true},
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   auctions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Auction'}]
 });
 
-/// Model methods
-// User.register  -  create a new user, hash their password
-// User.authenticate  -  log in a user, and give them a token
-
-/// Middleware
-// User.isLoggedIn  -  verify user is authenticated
-// User.isAdmin   -  verify user is admin
-
-/// Instance methods
-// user.generateToken  -  generate a JWT token
-// user.makeAdmin
-userSchema.statics.auth = roleRequired => {
-    return (req, res, next) => {
-        var token = req.cookies.accessToken;
-
-        jwt.verify(token, JWT_SECRET, (err, payload) => {
-            if(err) return res.status(401).send({error: 'Authentication required'});
-
-            User.findById(payload._id, (err, user) => {
-                if(err || !user) return res.status(401).send({error: 'User not found'});
-                req.user = user;
-
-                if(roleRequired === 'admin' && !req.user.admin){
-                    //check for admin privilages
-                    return res.status(403).send({error: 'Not authorized.'});
-                }
-                //they have the required privilages
-                next();
-            }).select('-password');
-        });
-
-    };
-
-};
-
 userSchema.statics.isLoggedIn = (req, res, next) => {
+    var token = req.cookies.accessToken;
 
+    jwt.verify(token, JWT_SECRET, (err, payload) => {
+        if(err) return res.status(401).send({error: 'Authentication required'});
 
-};
+        User.findById(payload._id, (err, user) => {
+            if(err || !user) return res.status(401).send({error: 'User not found'});
+            req.user = user;
 
-userSchema.statics.isAdmin = (req, res, next) => {
-    if(req.user.admin){
-        next();
-    } else{
-        res.status(403).send({error: 'Not authorized.'})
-    }
+            next();
+        }).select('-password');
+    });
+
 };
 
 userSchema.statics.register = (userObj, cb) => {
+    console.log('userObj:', userObj);
   User.findOne({email: userObj.email}, (err, dbUser) => {
     if(err || dbUser) return cb(err || {error: 'Email not available.'});
 
@@ -71,12 +40,14 @@ userSchema.statics.register = (userObj, cb) => {
       if(err) return cb(err);
 
       var user = new User({
+        firstName: userObj.firstName,
+        lastName: userObj.lastName,
         email: userObj.email,
         password: hash
       });
 
       user.save((err, savedUser) => {
-        savedUser.password = null;
+        //savedUser.password = null;
         cb(err, savedUser);
       });
     });
@@ -91,23 +62,42 @@ userSchema.statics.authenticate = (userObj, cb) => {
             if(err || !isGood) return cb(err || {error: 'Authentication failed. Invalid email or password'});
 
             var token = dbUser.generateToken();
+            console.log('token:', token);
 
             cb(null, token);
         });
     });
 };
 
-// user.generateToken()
-
 userSchema.methods.generateToken = function() {
   var payload = {
     _id: this._id,
     exp: moment().add(1, 'day').unix()
   };
-
+  console.log('JWT_SECRET:', JWT_SECRET);
   return jwt.sign(payload, JWT_SECRET);
 };
 
+userSchema.statics.edit = (id, passedObj) => {
+    User.findByIdAndUpdate(id, { $set: passedObj}, (err, updatedUser) => {
+        if(err) cb(err);
+
+        updatedUser.save((err, savedUser) => {
+            if(err) cb(err);
+
+            cb(null, savedUser);
+        });
+    });
+};
+
+userSchema.statics.addAuction = (user, auction, cb) => {
+    user.auctions.push(auction._id);
+    user.save((err, addedAuction) => {
+        if(err) cb(err)
+
+        cb(null, addedAuction)
+    })
+}
 
 var User = mongoose.model('User', userSchema);
 

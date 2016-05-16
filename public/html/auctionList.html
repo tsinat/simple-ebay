@@ -1,0 +1,33 @@
+<div class="container">
+    <form class="auction">
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" placeholder="search">
+            </div>
+            <div class="form-group col-xs-3">
+                <select class="form-control">
+                    <option>All Categories</option>
+                    <option>Books</option>
+                    <option>Consumer Electronics</option>
+                    <option>Collectables</option>
+                    <option>Sporting Goods</option>
+                </select>
+            </div>
+            <div class='col-xs-3'>
+                <button type="submit" class="btn search btn-success">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="auctionlist">
+        <table class='table'>
+            <tbody>
+                <tr ng-repeat='auction in auctions' ur-sref='auctionDetail()'>
+                    <td><img class='auctionsImage' ng-src="{{auction.image}}" alt=""></td>
+                    <td class='tdText'>{{auction.description}}</td>
+                    <td class='tdText'>{{auction.initialBid | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

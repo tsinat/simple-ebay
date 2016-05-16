@@ -23,7 +23,7 @@ app.controller('homeCtrl', function($scope, Auth) {
     console.log('homeCtrl!');
 
 });
-app.controller('auctionCtrl', function($scope, Auction) {
+app.controller('auctionCtrl', function($scope, Auction,  $state) {
     console.log('auctionCtrl!');
 
     getAllAuctions();
@@ -39,6 +39,10 @@ app.controller('auctionCtrl', function($scope, Auction) {
     }
 });
 
+app.controller('auctionDetailCtrl', function($scope, Auction, name) {
+    console.log('auctionDetailCtrl');
+    $scope.auction = name.data;
+});
 app.controller('newAuctionCtrl', function($scope, Auction) {
     console.log('newAuctionCtrl!');
 
@@ -74,7 +78,7 @@ app.controller('authFormCtrl', function($scope, $state, Auth) {
                 })
                 .then(res => {
 
-                    $state.go('home');
+                    $state.go('newAuction');
                 })
                 .catch(res => {
                     alert(res.data.error);

@@ -46,5 +46,7 @@ app.service('Auction', function($http, $q) {
     this.getAll = () => {
         return $http.get('/api/auctions');
     }
-
+    this.getOne = id => {
+        return $http.get(`/api/auctions/${id}`)
+    }
 });

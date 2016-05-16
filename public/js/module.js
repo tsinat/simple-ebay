@@ -25,10 +25,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: 'auctionCtrl'
     })
     .state('auctionDetail', {
-      url: '/auctionDetail',
+      url: '/auctionDetail/:id',
       templateUrl: '/html/auctionDetail.html',
-      controller: 'auctionDetailCtrl'
-
+      controller: 'auctionDetailCtrl',
+        resolve: {
+            name: function(Auction, $stateParams) {
+                console.log('$stateParams.id:', $stateParams.id);
+                return Auction.getOne($stateParams.id);
+            }
+        }
     })
     .state('newAuction', {
       url: '/newAuction',
@@ -36,9 +41,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: 'newAuctionCtrl',
       resolve: {
         profile: function(Auth, $q, $state) {
-          return Auth.getProfile(user._id)
+          return Auth.getProfile()
           .catch(() => {
-            $state.go('home');
+            $state.go('newAuction');
             return $q.reject();
           });
         }

@@ -44,3 +44,18 @@ td {
     margin-top: 30px;
     font-size: 1.5em;
 }
+.auctionsImageDetail{
+    width: 400px;
+    height: 400px;
+    float:left;
+    border:1px solid grey;
+    margin-right: 40px;
+}
+p {
+    font-size: 1.5em;
+
+}
+.bidAmount, .btn-success{
+    height: 40px;
+    font-size: 1.2em;   
+}

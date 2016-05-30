@@ -23,7 +23,7 @@ app.controller('homeCtrl', function($scope, Auth) {
     console.log('homeCtrl!');
 
 });
-app.controller('auctionCtrl', function($scope, Auction,  $state) {
+app.controller('auctionCtrl', function($scope, Auction, $state) {
     console.log('auctionCtrl!');
 
     getAllAuctions();
@@ -42,12 +42,16 @@ app.controller('auctionCtrl', function($scope, Auction,  $state) {
 app.controller('auctionDetailCtrl', function($scope, Auction, name) {
     console.log('auctionDetailCtrl');
     $scope.auction = name.data;
+    $scope.addBid = (auctionId, userId, value) => {
+        console.log(auctionId, userId, value);
+        Auction.placeBid(auctionId, userId, value);
+    }
 });
 app.controller('newAuctionCtrl', function($scope, Auction) {
     console.log('newAuctionCtrl!');
 
     $scope.addAuction = () => {
-        $scope.auction.owner= $scope.currentUser._id;
+        $scope.auction.owner = $scope.currentUser._id;
         Auction.create($scope.auction)
             .then(res => {
                 $scope.auction = {};

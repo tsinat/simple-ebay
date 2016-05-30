@@ -2,6 +2,6 @@
     <div><img class='auctionsImageDetail' ng-src="{{auction.image}}" alt=""></div>
     <p>{{auction.description}}</p>
     <p>{{auction.initialBid | currency}}</p>
-    <input type="number" class='bidAmount'>
-    <button class='btn btn-success'>Submit Bid</button>
+    <input type="number" ng-model='value' class='bidAmount'>
+    <button class='btn btn-success' ng-click="addBid(auction._id, currentUser._id, value)">Submit Bid</button>
 </div>

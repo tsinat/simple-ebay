@@ -1,61 +1,59 @@
-.currentUser{
-    color:white;
-    float:right;
-    margin-top:10px;
-    margin-right:40px;
+.currentUser {
+    color: white;
+    float: right;
+    margin-top: 10px;
+    margin-right: 40px;
 }
-.btn-main{
+.btn-main {
     border-radius: none !important;
-    color:silver;
+    color: silver;
     background-color: #252525;
 }
 .btn-main:focus {
-    color:silver;
+    color: silver;
 }
 .btn-main:hover {
-    color:grey;
+    color: grey;
 }
-.auction{
+.auction {
     margin-top: 20px;
 }
-.search{
-    padding:5px 60px;
+.search {
+    padding: 5px 60px;
 }
-.singleAuction{
+.singleAuction {
     border: 1px solid grey;
 }
-.auctionsImage{
+.auctionsImage {
     margin: 10px 20px;
-    width:200px;
+    width: 200px;
     height: 200px;
-
 }
 table {
     margin-top: 40px;
 }
-tr{
-    margin-bottom:20px;
+tr {
+    margin-bottom: 20px;
     /*border:1px solid grey;*/
 }
 td {
     min-width: 150px;
 }
-.tdText{
+.tdText {
     margin-top: 30px;
     font-size: 1.5em;
 }
-.auctionsImageDetail{
+.auctionsImageDetail {
     width: 400px;
     height: 400px;
-    float:left;
-    border:1px solid grey;
+    float: left;
+    border: 1px solid grey;
     margin-right: 40px;
 }
 p {
     font-size: 1.5em;
-
 }
-.bidAmount, .btn-success{
+.bidAmount, .btn-success {
     height: 40px;
-    font-size: 1.2em;   
+    font-size: 1.2em;
 }

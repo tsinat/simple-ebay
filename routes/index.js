@@ -10,16 +10,4 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
-// router.get('/secret', User.auth(), (req, res) => {
-//     console.log('req.user:', req.user);
-//     res.send('SECRET STUFF!!!');
-// });
-//
-// router.get('/admin', User.auth('admin'), (req, res) => {
-//     console.log('req.user:', req.user);
-//     res.send('ADMIN STUFF!!!');
-// });
-
-
 module.exports = router;

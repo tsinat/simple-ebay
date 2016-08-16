@@ -2,9 +2,6 @@
 
 var app = angular.module('simpleEbay', ['ui.router']);
 
-// app.run(function(Auth) {
-//   Auth.getProfile(user._id);
-// });
 
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

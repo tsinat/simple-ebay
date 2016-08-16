@@ -13,7 +13,6 @@ app.service('Auth', function($http, $q) {
             .then(res => {
                 console.log(res.data);
                 this.currentUser = res.data;
-                // return this.getProfile(res.data._id);
             });
     };
 
